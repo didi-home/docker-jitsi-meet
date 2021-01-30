@@ -28,6 +28,8 @@ spec:
               value: meet.jitsi
             - name: XMPP_AUTH_DOMAIN
               value: auth.meet.jitsi
+            - name: XMPP_MUC_DOMAIN
+              value: muc.meet.jitsi
             - name: XMPP_INTERNAL_MUC_DOMAIN
               value: internal-muc.meet.jitsi
             - name: JICOFO_COMPONENT_SECRET
@@ -50,6 +52,8 @@ spec:
           image: jitsi/prosody
           imagePullPolicy: Always
           env:
+            - name: PUBLIC_URL
+              value: "https://<your-external-domainname>"
             - name: XMPP_DOMAIN
               value: meet.jitsi
             - name: XMPP_AUTH_DOMAIN
@@ -85,6 +89,12 @@ spec:
           image: jitsi/web
           imagePullPolicy: Always
           env:
+            - name: DISABLE_HTTPS
+              value: "1"
+            - name: XMPP_CROSS_DOMAIN
+              value: "true"
+            - name: PUBLIC_URL
+              value: "https://<your-external-domainname>"
             - name: XMPP_SERVER
               value: localhost
             - name: JICOFO_AUTH_USER
